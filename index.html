@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>台茂購物中心</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Noto Sans TC", "Microsoft JhengHei", Arial, sans-serif;
+      color: #333;
+      background: #fff;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .topbar {
+      background: #f7f7f7;
+      font-size: 14px;
+      padding: 8px 40px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 24px;
+      color: #555;
+    }
+
+    .navbar {
+      height: 82px;
+      padding: 0 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #eee;
+      background: white;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #8a1538;
+    }
+
+    .logo span {
+      display: block;
+      font-size: 12px;
+      letter-spacing: 4px;
+      color: #999;
+      margin-top: 4px;
+    }
+
+    .menu {
+      display: flex;
+      gap: 30px;
+      font-size: 15px;
+      color: #333;
+    }
+
+    .menu a:hover {
+      color: #8a1538;
+    }
+
+    .hero {
+      position: relative;
+      height: 520px;
+      background:
+        linear-gradient(rgba(0,0,0,.15), rgba(0,0,0,.2)),
+        url("https://images.unsplash.com/photo-1519567241046-7f570eee3ce6?auto=format&fit=crop&w=1600&q=80")
+        center / cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+
+    .hero-content {
+      background: rgba(255,255,255,.16);
+      backdrop-filter: blur(6px);
+      padding: 42px 60px;
+      border-radius: 24px;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 16px;
+      letter-spacing: 3px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 32px;
+      background: #8a1538;
+      color: white;
+      border-radius: 999px;
+      font-weight: 600;
+    }
+
+    .quick-links {
+      max-width: 1180px;
+      margin: -50px auto 70px;
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      padding: 0 24px;
+    }
+
+    .quick-card {
+      background: white;
+      border-radius: 20px;
+      padding: 28px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,.1);
+      transition: .25s;
+    }
+
+    .quick-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .quick-card .icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .section {
+      max-width: 1180px;
+      margin: 0 auto 80px;
+      padding: 0 24px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .section-title small {
+      color: #8a1538;
+      letter-spacing: 3px;
+      font-weight: 700;
+    }
+
+    .section-title h2 {
+      font-size: 34px;
+      margin-top: 8px;
+    }
+
+    .event-card {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      background: #faf3f5;
+      border-radius: 28px;
+      overflow: hidden;
+    }
+
+    .event-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .event-info {
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .tag {
+      display: inline-block;
+      width: fit-content;
+      padding: 6px 14px;
+      background: #8a1538;
+      color: white;
+      border-radius: 999px;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .event-info h3 {
+      font-size: 30px;
+      margin-bottom: 18px;
+    }
+
+    .event-info p {
+      line-height: 1.8;
+      color: #555;
+      margin-bottom: 24px;
+    }
+
+    .dm-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .dm-tabs span {
+      padding: 9px 18px;
+      border: 1px solid #ddd;
+      border-radius: 999px;
+      font-size: 14px;
+    }
+
+    .dm-tabs .active {
+      background: #8a1538;
+      color: white;
+      border-color: #8a1538;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .product-card {
+      border: 1px solid #eee;
+      border-radius: 22px;
+      overflow: hidden;
+      background: white;
+      transition: .25s;
+    }
+
+    .product-card:hover {
+      box-shadow: 0 12px 28px rgba(0,0,0,.08);
+      transform: translateY(-4px);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+    }
+
+    .product-body {
+      padding: 18px;
+    }
+
+    .floor {
+      color: #8a1538;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .product-body h3 {
+      font-size: 17px;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .price {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .info-band {
+      background: #8a1538;
+      color: white;
+      padding: 44px 24px;
+      text-align: center;
+    }
+
+    .info-band h2 {
+      margin-bottom: 12px;
+    }
+
+    .footer {
+      background: #222;
+      color: #ddd;
+      padding: 42px 24px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .social {
+      margin-top: 18px;
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+    }
+
+    @media (max-width: 900px) {
+      .menu {
+        display: none;
+      }
+
+      .hero {
+        height: 420px;
+      }
+
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      .quick-links,
+      .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .event-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .topbar {
+        display: none;
+      }
+
+      .navbar {
+        padding: 0 20px;
+      }
+
+      .quick-links,
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-content {
+        padding: 28px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="topbar">
+    <a href="#">營業資訊</a>
+    <a href="#">品牌搜尋</a>
+    <a href="#">活動訊息</a>
+    <a href="#">美食推薦</a>
+    <a href="#">會員專區</a>
+  </div>
+
+  <header class="navbar">
+    <a href="#" class="logo">
+      TAIMALL
+      <span>台茂購物中心</span>
+    </a>
+
+    <nav class="menu">
+      <a href="#">檔期促銷</a>
+      <a href="#">線上DM</a>
+      <a href="#">活動訊息</a>
+      <a href="#">美食推薦</a>
+      <a href="#">樓層品牌</a>
+      <a href="#">顧客服務</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>520 為愛備好禮</h1>
+      <p>購物、餐飲、活動與美好生活一次滿足</p>
+      <a href="#" class="btn">查看活動</a>
+    </div>
+  </section>
+
+  <section class="quick-links">
+    <a href="#" class="quick-card">
+      <div class="icon">🛍️</div>
+      <h3>品牌搜尋</h3>
+    </a>
+    <a href="#" class="quick-card">
+      <div class="icon">🎁</div>
+      <h3>檔期促銷</h3>
+    </a>
+    <a href="#" class="quick-card">
+      <div class="icon">🍽️</div>
+      <h3>美食推薦</h3>
+    </a>
+    <a href="#" class="quick-card">
+      <div class="icon">🚗</div>
+      <h3>停車資訊</h3>
+    </a>
+  </section>
+
+  <section class="section">
+    <div class="section-title">
+      <small>MEMBER EVENT</small>
+      <h2>會員活動</h2>
+    </div>
+
+    <div class="event-card">
+      <img src="https://images.unsplash.com/photo-1607083206968-13611e3d76db?auto=format&fit=crop&w=900&q=80" alt="會員活動">
+      <div class="event-info">
+        <span class="tag">信用卡滿額禮</span>
+        <h3>520 為愛備好禮</h3>
+        <p>
+          當日館內刷指定銀行信用卡消費達門檻，
+          可依活動規則兌換會員專屬好禮。
+        </p>
+        <a href="#" class="btn">了解更多</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-title">
+      <small>ONLINE DM</small>
+      <h2>線上 DM</h2>
+    </div>
+
+    <div class="dm-tabs">
+      <span class="active">韓流美食祭</span>
+      <span>化妝品</span>
+      <span>女性服飾</span>
+      <span>3C 家電</span>
+      <span>珠寶飾品</span>
+      <span>生活雜貨</span>
+    </div>
+
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1582719188393-bb71ca45dbb9?auto=format&fit=crop&w=600&q=80" alt="">
+        <div class="product-body">
+          <div class="floor">B2F｜韓流美食祭</div>
+          <h3>MilkyShop 焦糖奶油夾心餅</h3>
+          <div class="price">推薦價 $880</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1517663157035-6183f1411d7d?auto=format&fit=crop&w=600&q=80" alt="">
+        <div class="product-body">
+          <div class="floor">1F｜3C 家電</div>
+          <h3>全自動咖啡機優惠組</h3>
+          <div class="price">$4,900</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=600&q=80" alt="">
+        <div class="product-body">
+          <div class="floor">1F｜珠寶飾品</div>
+          <h3>Galaxy 培育鑽石項鍊</h3>
+          <div class="price">$23,000</div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=600&q=80" alt="">
+        <div class="product-body">
+          <div class="floor">1F｜運動服飾</div>
+          <h3>春夏新品運動鞋款</h3>
+          <div class="price">新品上市</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="info-band">
+    <h2>營業時間</h2>
+    <p>週日至週四 11:00 - 22:00　｜　週五至週六 11:00 - 22:30</p>
+  </section>
+
+  <footer class="footer">
+    <div>台茂購物中心 TAIMALL Shopping Center</div>
+    <div class="social">
+      <a href="#">Facebook</a>
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+      <a href="#">APP下載</a>
+    </div>
+  </footer>
+
+</body>
+</html>
